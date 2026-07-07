@@ -24,6 +24,7 @@
                         <li class="nav-item"><a class="nav-link" href="{{ route('patients.index') }}">Patients</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('medecins.index') }}">Médecins</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('departements.index') }}">Départements</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('staff.create') }}">+ Staff</a></li>
                     @else
                         <li class="nav-item"><a class="nav-link" href="{{ route('appointments.create') }}">Prendre RDV</a></li>
                     @endif

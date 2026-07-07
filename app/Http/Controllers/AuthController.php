@@ -78,4 +78,34 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect('/login');
     }
+
+    public function showCreateStaff(Request $request)
+{
+    if ($request->user()->role !== 'staff') {
+        abort(403, 'Accès réservé au personnel.');
+    }
+    return view('staff.create');
+}
+
+public function storeStaff(Request $request)
+{
+    if ($request->user()->role !== 'staff') {
+        abort(403, 'Accès réservé au personnel.');
+    }
+
+    $data = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|min:6|confirmed',
+    ]);
+
+    User::create([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'password' => Hash::make($data['password']),
+        'role' => 'staff',
+    ]);
+
+    return redirect()->route('appointments.index')->with('success', 'Nouveau compte staff créé !');
+}
 }

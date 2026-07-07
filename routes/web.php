@@ -22,6 +22,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/appointments/create', [AppointmentController::class, 'create'])->name('appointments.create');
     Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
 
+    Route::get('/staff/create', [App\Http\Controllers\AuthController::class, 'showCreateStaff'])->name('staff.create');
+    Route::post('/staff', [App\Http\Controllers\AuthController::class, 'storeStaff'])->name('staff.store');
+
     // Staff : gestion des rendez-vous
     Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index');
     Route::get('/appointments-staff/create', [AppointmentController::class, 'createByStaff'])->name('appointments.create_staff');

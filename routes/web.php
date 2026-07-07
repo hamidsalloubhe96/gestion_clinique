@@ -17,21 +17,6 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-Route::get('/setup-secret-xyz123/create-staff', function () {
-    if (\App\Models\User::where('email', 'staff@clinique.com')->exists()) {
-        return 'Le compte staff existe déjà.';
-    }
-
-    \App\Models\User::create([
-        'name' => 'Admin Clinique',
-        'email' => 'staff@clinique.com',
-        'password' => bcrypt('password'),
-        'role' => 'staff',
-    ]);
-
-    return 'Compte staff créé avec succès !';
-});
-
 Route::middleware(['auth'])->group(function () {
     // Client : demander un RDV
     Route::get('/appointments/create', [AppointmentController::class, 'create'])->name('appointments.create');
